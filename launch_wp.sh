@@ -17,7 +17,7 @@ apt update
 apt install docker -y
 
 # Instalamos docker-compose #
-docker-compose -y
+apt install docker-compose -y
 
 # Habilitamos docker y arrancamos servicio #
 systemctl enable docker

@@ -37,3 +37,5 @@ rm -rf $HTTPASSWD_DIR/iaw_practica15
 cd $HTTPASSWD_DIR/wp_docker
 
 docker-compose up -d
+
+docker ps

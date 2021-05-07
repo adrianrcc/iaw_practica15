@@ -3,6 +3,13 @@
 
 # Instalación de docker y docker-compose #
 
+# -------------------------------#
+# CONFIGURACIÓN DE LAS VARIABLES #
+# -------------------------------#
+
+# Genéricas #
+HTTPASSWD_DIR=/home/ubuntu
+
 # ----------------------------#
 #         Instalación         #
 # ----------------------------#
@@ -24,4 +31,5 @@ systemctl enable docker
 systemctl start docker
 
 # Lanzamos docker-compose yml en modo detached #
+cd $HTTPASSWD_DIR/iaw_practica15
 docker-compose up -d

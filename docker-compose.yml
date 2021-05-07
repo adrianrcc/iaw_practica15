@@ -29,7 +29,7 @@ services:
       - frontend-network
       - backend-network
   
-   wordpress:
+    phpmyadmin:
     image: phpmyadmin
     environment:
       - PMA_ARBITRARY=1

@@ -26,6 +26,8 @@ services:
       - backend-network
     environment: 
       - PMA_ARBITRARY=1
+    depends_on: 
+      - mysql
     restart: always
   
   wordpress:

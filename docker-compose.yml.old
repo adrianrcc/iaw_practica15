@@ -1,0 +1,47 @@
+version: '3.4'
+
+services:
+
+  mysql:
+    image: mysql:5.7.28
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - backend-network
+
+  wordpress:
+    image: wordpress
+    environment:
+      - WORDPRESS_DB_HOST=mysqlc
+      - WORDPRESS_DB_NAME=wp_database
+      - WORDPRESS_DB_USER=wp_user
+      - WORDPRESS_DB_PASSWORD=wp_password
+    ports:
+      - "80":"80"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - frontend-network
+      - backend-network
+  
+    phpmyadmin:
+    image: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - "8080":"80"
+    networks:
+      - frontend-network
+      - backend-network
+ 
+volumes:
+  mysql_data:
+    
+networks:
+  frontend-network:
+  backend-network:

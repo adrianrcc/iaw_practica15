@@ -31,5 +31,9 @@ systemctl enable docker
 systemctl start docker
 
 # Lanzamos docker-compose yml en modo detached #
-cd $HTTPASSWD_DIR/iaw_practica15
+mkdir $HTTPASSWD_DIR/wp_docker
+cp $HTTPASSWD_DIR/iaw_practica15/* /wp_docker
+rm -rf $HTTPASSWD_DIR/iaw_practica15
+cd $HTTPASSWD_DIR/wp_docker
+
 docker-compose up -d

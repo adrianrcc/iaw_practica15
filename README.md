@@ -62,4 +62,11 @@ restart: always
 
 #### 2.3 Orden en el que se inician los servicios
 
-Indicamos el orden en el que se deben iniciar los servicios con la opción "depends_on".
+"depends_on" expresa la dependencia entre los servicios, es decir, "docker-compose up" iniciará los servicios en orden de dependencia. 
+
+~~~
+depends_on: 
+      - mysql
+~~~
+
+Nota: depends_on no esperará a que mysql esté "listo" antes de iniciar phpmyadmin y wordpress, sólo hasta que se hayan iniciado. 

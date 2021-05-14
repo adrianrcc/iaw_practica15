@@ -36,21 +36,7 @@ Los servicios definidos en el archivo docker-compose.yml usan dos redes:
 - frontend-network
 - backend-network
 
-En la red frontend-network están los servicios:
-
-- WordPress
-- phpMyAdmin
-
-Y en la red backend-network sólo está el servicio:
-
-- MySQL
-
-Sólo los servicios que están en la red frontend-network expondrán sus puertos en el host. Por lo tanto, el servicio de MySQL no deberá estar accesible desde el host: nosotros nos conectamos al puerto 80 y 8080 de la instancia de AWS, MySQL trabaja con la base de datos por detrás.
-
-Como usamos la última versión de MySQL, para evitar que se use la contraseña de root en vez de la de mysql usamos el comando:
-~~~
-command: --default-authentication-plugin=mysql_native_password
-~~~
+Los servicios WordPress y phpMyAdmin se conectan con el servicio MySQL a través de la red backend-network. Nosotros nos conectamos a los servicios WordPress y phpMyAdmin a través de la red frontend-network a través de los puertos 80 y 8080 respectivamente. Sólo los servicios que están en la red frontend-network expondrán sus puertos en el host. Por lo tanto, el servicio de MySQL no deberá estar accesible desde el host.
 
 #### 2.2 Docker restart policies
 
@@ -70,3 +56,14 @@ depends_on:
 ~~~
 
 Nota: depends_on no esperará a que mysql esté "listo" antes de iniciar phpmyadmin y wordpress, sólo hasta que se hayan iniciado. 
+
+#### 2.4 Otras consideraciones
+
+Como usamos la última versión de MySQL, para evitar que se use la contraseña de root en vez de la de mysql usamos el comando:
+~~~
+command: --default-authentication-plugin=mysql_native_password
+~~~
+
+También hemos establecido volúmenes del tipo "volume" para asegurar la persistencia de datos en los contenedores MySQL y WordPress. En phpMyAdmin no es necesario hacerlo ya que es sólo una aplicación que sirve para gestionar la base de datos via web y no necesitamos que almacene nada.
+
+Por último, ya que no estamos utilizando variantes de entorno, nuestro repositorio carece de un archivo .env.

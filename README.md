@@ -26,8 +26,6 @@ A continuación se describen muy brevemente algunas de las tareas que llevaremos
 
 - Crear un archivo docker-compose.yml para poder desplegar los servicios de WordPress, MySQL y phpMyAdmin utilizando las imágenes oficiales de Docker Hub.
 
-- Buscar cuál es la dirección IP pública de su instancia en AWS y comprobar que puede acceder a los servicios de WordPress y phpMyAdmin desde una navegador web.
-
 ### 2 Requisitos del archivo docker-compose.yml
 #### 2.1 Networks
 
@@ -55,7 +53,7 @@ depends_on:
       - mysql
 ~~~
 
-Nota: depends_on no esperará a que mysql esté "listo" antes de iniciar phpmyadmin y wordpress, sólo hasta que se hayan iniciado. 
+**Nota**: depends_on no esperará a que mysql esté "listo" antes de iniciar phpmyadmin y wordpress, sólo hasta que se hayan iniciado. 
 
 #### 2.4 Otras consideraciones
 
@@ -64,6 +62,6 @@ Como usamos la última versión de MySQL, para evitar que se use la contraseña 
 command: --default-authentication-plugin=mysql_native_password
 ~~~
 
-También hemos establecido volúmenes del tipo "volume" para asegurar la persistencia de datos en los contenedores MySQL y WordPress. En phpMyAdmin no es necesario hacerlo ya que es sólo una aplicación que sirve para gestionar la base de datos via web y no necesitamos que almacene nada.
+También hemos establecido volúmenes del tipo **"volume"** para asegurar la persistencia de datos en los contenedores MySQL y WordPress. En phpMyAdmin no es necesario hacerlo ya que es sólo una aplicación que sirve para gestionar la base de datos via web y no necesitamos que almacene nada.
 
-Por último, ya que no estamos utilizando variantes de entorno, nuestro repositorio carece de un archivo .env.
+Por último, ya que no estamos utilizando variantes de entorno, nuestro repositorio carece de un archivo ".env".
